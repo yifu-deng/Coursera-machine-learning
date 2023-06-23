@@ -275,3 +275,7 @@ $$ f_{\vec{w},b}(\vec{x}) = w_1x_1 + w_2x_2 + w_3x_3 + b $$
 Example:
 
 $$ f_{\vec{w},b}(x) = w_0 + w_1x + w_2x^2 + w_3x^3 + b $$
+
+## Week 3: Classification
+
+### Classification with logistic regression
