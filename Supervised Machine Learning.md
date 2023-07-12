@@ -210,7 +210,7 @@ Gradient descent algorithm:
 repeat until convergence:{
 $$ w_j = w_j - \alpha \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)})x_j^{(i)} \tag{4} $$
 $$ b = b - \alpha \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)}) \tag{5} $$}
-**Simultaneous update**: `w(for j = 0, ..., n-1)` and `b`
+**Simultaneous update**: `w(for j = 1, ..., n)` and `b`
 
 ### An alternative to gradient descent
 
