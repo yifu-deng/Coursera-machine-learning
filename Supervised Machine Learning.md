@@ -128,8 +128,8 @@ $$ y = f_{w,b}(x) = wx + b \tag{9} $$
 Cost function:
 $$ J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m} (f\_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{10} $$
 Gradient descent algorithm:
-repeat until convergence:{
-$$ w = w - \alpha \frac{d}{dw} J(w,b) \tag{11} $$
+repeat until convergence:
+{$$ w = w - \alpha \frac{d}{dw} J(w,b) \tag{11} $$
 $$ b = b - \alpha \frac{d}{db} J(w,b) \tag{12} $$}
 
 $$
@@ -289,10 +289,20 @@ $$ f_{\vec{w},b}(x) = w_0 + w_1x + w_2x^2 + w_3x^3 + b $$
 ![sigmoid function](images/sigmoid_function.png)
 pass the value of linear regression into logistic regression
 
-- $$ z = f_{\vec{w},b}(\vec{x}) = \vec{w} \cdot \vec{x} + b $$
-- $$ g(z) = \frac{1}{1 + e^{-(\vec{w} \cdot \vec{x} + b)}} $$
+- $$ z = \vec{w} \cdot \vec{x} + b $$
+- $$ f_{\vec{w},b}(\vec{x}) = g(z) = \frac{1}{1 + e^{-(\vec{w} \cdot \vec{x} + b)}} $$
 
 Due to **P(y=0) + P(y=1) = 1**
 
 - $$ f_{\vec{w},b}(\vec{x}) = P(y=1 | \vec{x}; \vec{w},b) $$
   - Probability that y = 1, given x, parameterized by w, b
+
+#### Decision boundary
+
+$$ z = \vec{w} \cdot \vec{x} + b = 0 $$
+
+- $$ \vec{w} \cdot \vec{x} + b = 0 $$ is the **decision boundary**
+  - We predict y = 1 if $$ \vec{w} \cdot \vec{x} + b \geq 0 $$
+  - We predict y = 0 if $$ \vec{w} \cdot \vec{x} + b < 0 $$
+
+### Logistic regression cost function
