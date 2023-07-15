@@ -279,3 +279,20 @@ $$ f_{\vec{w},b}(x) = w_0 + w_1x + w_2x^2 + w_3x^3 + b $$
 ## Week 3: Classification
 
 ### Classification with logistic regression
+
+#### logistic regression
+
+- Sigmoid funcion(`logistic function`)
+  - output between 0 and 1
+  - $$ g(z) = \frac{1}{1 + e^{-z}} ( 0 < g(z) < 1 )$$
+
+![sigmoid function](images/sigmoid_function.png)
+pass the value of linear regression into logistic regression
+
+- $$ z = f_{\vec{w},b}(\vec{x}) = \vec{w} \cdot \vec{x} + b $$
+- $$ g(z) = \frac{1}{1 + e^{-(\vec{w} \cdot \vec{x} + b)}} $$
+
+Due to **P(y=0) + P(y=1) = 1**
+
+- $$ f_{\vec{w},b}(\vec{x}) = P(y=1 | \vec{x}; \vec{w},b) $$
+  - Probability that y = 1, given x, parameterized by w, b
