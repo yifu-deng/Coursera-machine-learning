@@ -39,7 +39,7 @@
 - **Cost function**: Measure the accuracy of our hypothesis function
 
   - $$J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{1}$$
-    - $$ ŷ^{(i)} = f\_{w,b}(x^{(i)}) = wx^{(i)} + b \tag{2} $$
+    - $$ ŷ^{(i)} = f_{w,b}(x^{(i)}) = wx^{(i)} + b \tag{2} $$
     - m: number of training examples
     - reason for `1/2m`: make later calculations look `neater`
   - **Goal**: minimize `J(w,b)`
@@ -126,7 +126,7 @@ Can reach local minimum with fixed learning rate
 Linear regression model:
 $$ y = f_{w,b}(x) = wx + b \tag{9} $$
 Cost function:
-$$ J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m} (f\_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{10} $$
+$$ J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{10} $$
 Gradient descent algorithm:
 repeat until convergence:
 {$$ w = w - \alpha \frac{d}{dw} J(w,b) \tag{11} $$
@@ -204,12 +204,12 @@ $$ f_{\vec{w},b}(\vec{x}) = \vec{w} \cdot \vec{x} + b = w_1x_1 + w_2x_2 + ... + 
 ### Gradient descent for multiple variables
 
 Cost function:
-$$ J(\vec{w},b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)})^2 \tag{3} $$
+$$ J(\vec{w},b) = \frac{1}{2m} \sum\limits_{i = 1}^{m} (f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)})^2 \tag{3} $$
 
 Gradient descent algorithm:
 repeat until convergence:{
-$$ w_j = w_j - \alpha \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)})x_j^{(i)} \tag{4} $$
-$$ b = b - \alpha \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)}) \tag{5} $$}
+$$ w_j = w_j - \alpha \frac{1}{m} \sum\limits_{i = 1}^{m} (f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)})x_j^{(i)} \tag{4} $$
+$$ b = b - \alpha \frac{1}{m} \sum\limits_{i = 1}^{m} (f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)}) \tag{5} $$}
 **Simultaneous update**: `w(for j = 1, ..., n)` and `b`
 
 ### An alternative to gradient descent
@@ -225,35 +225,35 @@ $$ b = b - \alpha \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{\vec{w},b}(\vec{x}^{
 
 Example:
 
-1. $$ 300 <= x_1 <= 2000 $$, then $$ \frac{x_1}{2000} $$
-2. $$ 0 <= x_2 <= 5 $$, then $$ \frac{x_2}{5} $$
+1. $ 300 <= x_1 <= 2000 $ then $$ \frac{x_1}{2000} $$
+2. $ 0 <= x_2 <= 5 $ then $$ \frac{x_2}{5} $$
 
 - $$ x_i = \frac{x_i}{max} $$
-- Get every feature into approximately a $$ -1 \leq x_i \leq 1 $$
+- Get every feature into approximately a $ -1 \leq x_i \leq 1 $
 
 ### Mean normalization
 
 - $$ x_i = \frac{x_i - \mu_i}{max - min} $$
-  - $$ \mu_i $$ is the average of all the values for feature
+  - $ \mu_i $ is the average of all the values for feature
     - $$ \mu_i = \frac{1}{m} \sum\limits_{j = 0}^{m-1} x_j^{(i)} $$
 
 ### Z-score normalization
 
 - $$ x_j^{(i)} = \frac{x_j^{(i)} - \mu_j}{\sigma_j} $$
-  - $$ \sigma_i $$ is the standard deviation of all the values for feature
-    - $$ \sigma_i = \sqrt{\frac{1}{m} \sum\limits_{i = 0}^{m-1} (x_j^{(i)} - \mu_j)^2} $$
+  - $ \sigma_i $ is the standard deviation of all the values for feature
+    - $$ \sigma_i = \sqrt{\frac{1}{m} \sum\limits_{i = 1}^{m} (x_j^{(i)} - \mu_j)^2} $$
   
 ### Choosing the learning rate
 
-- Plot $$ J(\vec{w},b) $$ as a function of the number of iterations of gradient descent
+- Plot $ J(\vec{w},b) $ as a function of the number of iterations of gradient descent
   - If the cost function is not just decreasing, but jumping up and down or even increasing, the reason maybe:
     1. code has bugs
     2. learning rate is too large
 With a small *learning rate*, *cost function* should **decrease** on every iteration
     - `Debug`:**Set the learning rate to a very small value, if the algorithm is not working correctly, then try to fix the code**
-      - Values of $$ \alpha $$ to try:
+      - Values of $ \alpha $ to try:
         - ... 0.001 0.003 0.01 0.03 0.1 0.3 1 ...
-        - For each value of $$ \alpha $$, **plot** the cost function, pick the learning rate that causes the cost function to decrease the **fastest** and **consistently**
+        - For each value of $ \alpha $ **plot** the cost function, pick the learning rate that causes the cost function to decrease the **fastest** and **consistently**
         - **find a value that is too small and a value that is too large, slowly try to pick the largest possible learning rate**
     - If learning rate is too small, gradient descent can be slow to converge
 
@@ -264,7 +264,7 @@ Using `intuition` to design `new features` by transforming or combining the orig
 Example:
 
 $$ f_{\vec{w},b}(\vec{x}) = w_1x_1 + w_2x_2 + b $$
-If $$ x_1 $$ is the **frontage** of a house, $$ x_2 $$ is the **depth** of a house, then $$ x_3 = x_1x_2 $$ is the **area** of a house
+If $ x_1 $ is the **frontage** of a house, $ x_2 $ is the **depth** of a house, then $ x_3 = x_1x_2 $ is the **area** of a house
 $$ x_3 = x_1x_2 $$ is a new feature
 $$ f_{\vec{w},b}(\vec{x}) = w_1x_1 + w_2x_2 + w_3x_3 + b $$
 
@@ -306,3 +306,69 @@ $$ z = \vec{w} \cdot \vec{x} + b = 0 $$
   - We predict y = 0 if $$ \vec{w} \cdot \vec{x} + b < 0 $$
 
 ### Logistic regression cost function
+
+- Cost function for logistic regression
+  - $$ J(\vec{w},b) = \frac{1}{m} \sum\limits_{i = 1}^{m} \frac{1}{2}(f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)})^2 $$
+    - $$ \frac{1}{2}(f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)})^2 = \mathcal{L}(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)}) $$
+    - **L** is the **loss function**
+  - $$ f_{\vec{w},b}(\vec{x}) = \frac{1}{1 + e^{-(\vec{w} \cdot \vec{x} + b)}} $$
+
+![Squared error cost](images/squared_error_cost.png)
+![y = 1](images/C1_W3_LogisticLoss_a.png)
+![y = 0](images/C1_W3_LogisticLoss_b.png)
+
+- Logistic loss function
+  - $
+\mathcal{L}(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)}) = \begin{cases}
+    -log(f_{\vec{w},b}(\vec{x}^{(i)}), & \text{if } y^{(i)} = 1 \\
+    -log(1 - f_{\vec{w},b}(\vec{x}^{(i)}), & \text{if } y^{(i)} = 0
+\end{cases}
+$
+
+So the cost function is
+
+- $$ J(\vec{w},b) = \frac{1}{m} \sum\limits_{i = 1}^{m} \mathcal{L}(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)}) $$
+  - $$ f_{\vec{w},b}(\vec{x}) = \frac{1}{1 + e^{-(\vec{w} \cdot \vec{x} + b)}} $$
+
+### Simplified cost function
+
+- $$\mathcal L(f_{\mathbf{w},b}(\mathbf{x}^{(i)}), y^{(i)}) = (-y^{(i)} \log\left(f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) - \left( 1 - y^{(i)}\right) \log \left( 1 - f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right)$$
+  - when $ y^{(i)} = 0$, the left-hand term is eliminated:
+$$
+\begin{align}
+\mathcal L(f_{\mathbf{w},b}(\mathbf{x}^{(i)}), 0) &= (-(0) \log\left(f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) - \left( 1 - 0\right) \log \left( 1 - f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) \\
+&= -\log \left( 1 - f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right)
+\end{align}
+$$
+  - and when $ y^{(i)} = 1$, the right-hand term is eliminated:
+$$
+\begin{align}
+  \mathcal L(f_{\mathbf{w},b}(\mathbf{x}^{(i)}), 1) &=  (-(1) \log\left(f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) - \left( 1 - 1\right) \log \left( 1 - f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right)\\
+  &=  -\log\left(f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right)
+\end{align}
+$$
+
+So the cost function can be simplified as
+
+- $$ J(\vec{w},b) = - \frac{1}{m} \sum\limits_{i = 1}^{m} \left[ y^{(i)} \log\left(f_{\vec{w},b}(\vec{x}^{(i)})\right) + (1 - y^{(i)}) \log\left(1 - f_{\vec{w},b}(\vec{x}^{(i)})\right) \right] $$
+  - $$ f_{\vec{w},b}(\vec{x}) = \frac{1}{1 + e^{-(\vec{w} \cdot \vec{x} + b)}} $$
+
+The reason to choose this cost function is that it is **convex**.
+
+### Gradient descent for logistic regression
+
+$$ J(\vec{w},b) = - \frac{1}{m} \sum\limits_{i = 1}^{m} \left[ y^{(i)} \log\left(f_{\vec{w},b}(\vec{x}^{(i)})\right) + (1 - y^{(i)}) \log\left(1 - f_{\vec{w},b}(\vec{x}^{(i)})\right) \right] $$
+repeat {
+$$ w_j = w_j - \alpha \frac{\partial J(\vec{w},b)}{\partial w_j}  \text{(for j = 0..n-1)} $$
+$$ b = b - \alpha \frac{\partial J(\vec{w},b)}{\partial b} $$
+} simultaneously update all $ w_j $ and $ b $
+
+$$ \frac{\partial J(\vec{w},b)}{\partial w_j} = \frac{1}{m} \sum\limits_{i = 1}^{m} \left( f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)} \right) x_j^{(i)} $$
+$$ \frac{\partial J(\vec{w},b)}{\partial b} = \frac{1}{m} \sum\limits_{i = 1}^{m} \left( f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)} \right) $$
+
+- Linear regression: $ f_{\vec{w},b}(\vec{x}) = \vec{w} \cdot \vec{x} + b $
+- logistic regression: $ f_{\vec{w},b}(\vec{x}) = \frac{1}{1 + e^{-(\vec{w} \cdot \vec{x} + b)}} $
+- Same concepts:
+  - Monitor gradient descent(learning curve) to make sure it is converging
+  - Vectorized implementation
+  - Feature scaling
