@@ -372,3 +372,65 @@ $$ \frac{\partial J(\vec{w},b)}{\partial b} = \frac{1}{m} \sum\limits_{i = 1}^{m
   - Monitor gradient descent(learning curve) to make sure it is converging
   - Vectorized implementation
   - Feature scaling
+
+### Overfitting
+
+- Overfitting
+  - Underfitting: high bias
+  - Overfitting: high variance
+  - Just right: fitting well
+  
+![overfitting_regression_example](images/overfitting_regression_example.png)
+![overfitting_classification_example](images/overfitting_classification_example.png)
+
+- Addressing overfitting
+  1. Collect more data
+  2. Select fewer features
+     1. Feature selection
+  3. Reduce size of parameters
+     1. Regularization
+
+### Cost function with regularization
+
+- Regularization
+  - Keep all the features, but reduce magnitude/values of parameters $ \vec{w} $
+  - Works well when we have a lot of features, each of which contributes a bit to predicting $ y $
+  - Reduces overfitting.
+
+- $$ J(\vec{w},b) = \frac{1}{2m} \sum\limits_{i = 1}^{m} \left( f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)} \right)^2 + \frac{\lambda}{2m} \sum\limits_{j = 1}^{n} w_j^2 $$
+- We want to minimize $ J(\vec{w},b) $ with respect to $ \vec{w} $ and $ b $.
+  - The first term is the same as the cost function of linear regression.
+  - The second term is the regularization term.
+    - If $ \lambda $ is too large, it will smooth the function too much and cause underfitting.
+    - If $ \lambda $ is too small, it will not smooth the function enough and cause overfitting.
+
+Gradient descent for linear regression with regularization:
+
+$$ J(\vec{w},b) = \frac{1}{2m} \sum\limits_{i = 1}^{m} \left( f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)} \right)^2 + \frac{\lambda}{2m} \sum\limits_{j = 1}^{n} w_j^2 $$
+
+Gradient descent for logistic regression with regularization:
+
+$$ J(\vec{w},b) = - \frac{1}{m} \sum\limits_{i = 1}^{m} \left[ y^{(i)} \log\left(f_{\vec{w},b}(\vec{x}^{(i)})\right) + (1 - y^{(i)}) \log\left(1 - f_{\vec{w},b}(\vec{x}^{(i)})\right) \right] + \frac{\lambda}{2m} \sum\limits_{j = 1}^{n} w_j^2 $$
+
+- **For logistic regression, $ f(x) $ is sigmoid(logistic) functio, whereas for linear regression, $ f(x) $ is linear function.**
+  - Logistic regression: $ f_{\vec{w},b}(\vec{x}) = \frac{1}{1 + e^{-(\vec{w} \cdot \vec{x} + b)}} $
+  - Linear regression: $ f_{\vec{w},b}(\vec{x}) = \vec{w} \cdot \vec{x} + b $
+
+repeat {
+
+- $$ w_j = w_j - \alpha \frac{\partial J(\vec{w},b)}{\partial w_j} $$
+  - $$ \frac{\partial J(\vec{w},b)}{\partial w_j} = \frac{1}{m} \sum\limits_{i = 1}^{m} \left( f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)} \right) x_j^{(i)} + \frac{\lambda}{m} w_j $$
+- $$ b = b - \alpha \frac{\partial J(\vec{w},b)}{\partial b} $$
+  - $$ \frac{\partial J(\vec{w},b)}{\partial b} = \frac{1}{m} \sum\limits_{i = 1}^{m} \left( f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)} \right) $$
+
+} simultaneously update all $ w_j $ and $ b $
+
+Now, the **Gradient descent for logistic regression with regularization** is
+
+repeat {
+  $$ w_j = w_j - \alpha \left[ \frac{1}{m} \sum\limits_{i = 1}^{m} \left( f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)} \right) x_j^{(i)} + \frac{\lambda}{m} w_j \right] $$
+  $$ b = b - \alpha \frac{1}{m} \sum\limits_{i = 1}^{m} \left( f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)} \right) $$
+} simultaneously update all $ w_j $ and $ b $
+
+$$ w_j = w_j - \alpha \frac{\lambda}{m} w_j - \alpha \frac{1}{m} \sum\limits_{i = 1}^{m} \left( f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)} \right) x_j^{(i)} \\ = \left( 1 - \alpha \frac{\lambda}{m} \right) w_j - \alpha \frac{1}{m} \sum\limits_{i = 1}^{m} \left( f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)} \right) x_j^{(i)} $$
+**So we can see that the regularization term is just a rescaling of the parameters.**
